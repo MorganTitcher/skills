@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euo pipefail
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cmd="${1:-}"; shift || true
+case "$cmd" in
+  check) exec "$DIR/scripts/ux-check.sh" "$@";;
+  scan) exec "$DIR/scripts/ux-scan.sh" "$@";;
+  ia) exec "$DIR/scripts/ux-ia.sh" "$@";;
+  screen) exec "$DIR/scripts/ux-screen.sh" "$@";;
+  rubric) exec "$DIR/scripts/ux-rubric.sh" "$@";;
+  audit) exec "$DIR/scripts/ux-audit.sh" "$@";;
+  validate) exec "$DIR/scripts/ux-validate.sh" "$@";;
+  *)
+    cat <<'EOF'
+ux (ux-architecture-and-interaction-design)
+
+Commands:
+  ux check
+  ux scan --root . --out artifacts/repo_scan.json
+  ux ia --product "My Product" --scan artifacts/repo_scan.json --out artifacts/ia_map.json
+  ux screen --screen "All Patients" --scan artifacts/repo_scan.json --out artifacts/screens/all_patients.json
+  ux rubric --screens artifacts/screens --out artifacts/rubric_report.json
+  ux audit --root . --files "app/|pages/|components/" --out artifacts/ux_audit.txt
+  ux validate --file ... --schema schemas/...
+
+Tip: export THRESHOLD=5 to make the rubric gate stricter.
+EOF
+    exit 1
+    ;;
+esac

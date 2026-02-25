@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "screen",
+    "intent",
+    "layout",
+    "disclosure_layers",
+    "states",
+    "interactions",
+    "instrumentation"
+  ],
+  "properties": {
+    "screen": {
+      "type": "string",
+      "minLength": 1
+    },
+    "intent": {
+      "type": "object",
+      "required": [
+        "primary_user_question",
+        "success_definition"
+      ],
+      "properties": {
+        "primary_user_question": {
+          "type": "string",
+          "minLength": 8
+        },
+        "secondary_questions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "success_definition": {
+          "type": "string",
+          "minLength": 4
+        }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "required": [
+        "regions"
+      ],
+      "properties": {
+        "regions": {
+          "type": "array",
+          "minItems": 2
+        }
+      }
+    },
+    "disclosure_layers": {
+      "type": "object",
+      "required": [
+        "layer0_default",
+        "layer1_contextual",
+        "layer2_expert"
+      ]
+    },
+    "states": {
+      "type": "object",
+      "required": [
+        "loading",
+        "empty",
+        "error",
+        "partial",
+        "permission_denied",
+        "stale_or_conflict"
+      ]
+    },
+    "interactions": {
+      "type": "array",
+      "minItems": 1
+    },
+    "instrumentation": {
+      "type": "object",
+      "required": [
+        "events"
+      ],
+      "properties": {
+        "events": {
+          "type": "array",
+          "minItems": 2
+        }
+      }
+    }
+  }
+}

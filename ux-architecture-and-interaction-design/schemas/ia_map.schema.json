@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "product",
+    "nav"
+  ],
+  "properties": {
+    "product": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nav": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "user_questions",
+          "cues",
+          "primary_actions"
+        ]
+      }
+    }
+  }
+}
